@@ -10,7 +10,7 @@ I've included a schematic diagram below of how all wires and hardware should be 
 
 ![schematic](./schematic.png)
 
-## Usage isntructions
+## Usage instructions
 
 - Top button: Reset / 0.
 - Middle button: +1.

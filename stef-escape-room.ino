@@ -3,6 +3,7 @@
 #include <Wire.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
+#include <math.h>
 
 // Include custom libraries
 #include "pitches.h"
@@ -106,50 +107,50 @@ void playLevelFive() {
   display.clearDisplay();
   display.setTextSize(1);
   display.setCursor(0, 0);
-  display.println("Hoeveel jaar verschil\r\nzit er tussen\r\nonze geboortejaren?\r\n(Menno en Maarten)");
+  display.println("Welke maand is WCEU?");
   display.display();
 
-  awaitCorrectAnswer(0);
+  awaitCorrectAnswer(6);
 }
 
 void playLevelFour() {
   display.clearDisplay();
   display.setTextSize(1);
   display.setCursor(0, 0);
-  display.println("Wat is\r\n11011010 - 11000110?");
+  display.println("Hoe groot is onze\r\nstandaard grid gap?");
   display.display();
 
-  awaitCorrectAnswer(20);
+  awaitCorrectAnswer(32);
 }
 
 void playLevelThree() {
   display.clearDisplay();
   display.setTextSize(1);
   display.setCursor(0, 0);
-  display.println("Op welke latitude\r\nbevinden wij ons?\r\n(afgerond)");
+  display.println("Hoeveel collega\r\ndesigners heb je?");
   display.display();
 
-  awaitCorrectAnswer(52);
+  awaitCorrectAnswer(4);
 }
 
 void playLevelTwo() {
   display.clearDisplay();
   display.setTextSize(1);
   display.setCursor(0, 0);
-  display.println("Decodeer:\r\nMA==");
+  display.println("Wat is de minimale\r\nlettergrootte die\r\naan a11y regels kan\r\nvoldoen?");
   display.display();
 
-  awaitCorrectAnswer(0);
+  awaitCorrectAnswer(14);
 }
 
 void playLevelOne() {
   display.clearDisplay();
   display.setTextSize(1);
   display.setCursor(0, 0);
-  display.println("Als 42 het antwoord\r\nis op alles, dan is\r\n... het antwoord\r\nop niets.");
+  display.println("Hoeveel kernwaardes\r\nheeft Level level?");
   display.display();
 
-  awaitCorrectAnswer(24);
+  awaitCorrectAnswer(3);
 }
 
 void playLevelZero() {
@@ -158,6 +159,9 @@ void playLevelZero() {
     display.setTextSize(1);
     display.setCursor(100, 0);
     display.println(String(percent + 1) + "%");
+    float lineX2 = round(((float)percent + (float)1) / (float)100 * ((float)display.width() - (float)1 ));
+    Serial.println(lineX2);
+    display.fillRect(0, display.height() - 6, lineX2, 5, SSD1306_WHITE);
     display.display();
   }
 
@@ -232,6 +236,7 @@ int awaitUserInput() {
       if (digitalRead(PIN_BUTTON_RESET) == HIGH) {
         currentInput = 0;
         displayCurrentInputValue(currentInput);
+        delay(200);
       }
       if (digitalRead(PIN_BUTTON_ADD) == HIGH) {
         currentInput++;
@@ -239,7 +244,7 @@ int awaitUserInput() {
         delay(200);
       }
   }
- 
+
   return currentInput;
 }
 
